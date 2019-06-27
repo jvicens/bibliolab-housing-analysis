@@ -4,12 +4,17 @@ class House():
 
     house_count = 0
 
-    def __init__(self, average_price):
+    def __init__(self, average_price, current_round):
 
         self.id = House.house_count + 1
         self.price = average_price
         self.renter = None
         self.round_rented = 0
+        self.prices = []
+        self.rounds = []
+        self.rounds_rented = []
+        self.prices.append(average_price)
+        self.rounds.append(current_round)
 
         House.house_count +=1
 
@@ -18,12 +23,21 @@ class House():
     def countAgents(self):
         print "Total House %d" % House.agent_count
 
-    def updateRenting(self, renter, round):
+    def updateRenting(self, renter, current_round):
         self.renter = renter
-        self.round_rented = round
+        self.round_rented = current_round
 
-        print "Renter" %(self.id_renter)
-        print "Round" %(self.round_rented)
+        return self
+
+    def displayHouse(self):
+        print 'House %d' % self.id
+        print 'Price %d' % self.price
+        print 'Round rented %d' % self.round_rented
+
+    def displayPriceEvolution(self):
+        for index, price in enumerate(self.prices):
+            print 'Round %d (%d): House %d, %d euros' %(self.rounds[index], self.rounds_rented[index], self.id, self.prices[index])
+
 
 
 
